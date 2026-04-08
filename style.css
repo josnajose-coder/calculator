@@ -1,0 +1,169 @@
+:root {
+    --bg-color: #f3f4f6;
+    --calc-bg: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --btn-bg: #f9fafb;
+    --btn-hover: #e5e7eb;
+    --btn-active: #d1d5db;
+    --operator-bg: #e0e7ff;
+    --operator-text: #4f46e5;
+    --operator-hover: #c7d2fe;
+    --accent-bg: #fecaca;
+    --accent-text: #dc2626;
+    --accent-hover: #fca5a5;
+    --equals-bg: #4f46e5;
+    --equals-text: #ffffff;
+    --equals-hover: #4338ca;
+    
+    --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.calculator {
+    background-color: var(--calc-bg);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    width: 320px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.display {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    background-color: var(--calc-bg);
+    min-height: 120px;
+}
+
+.previous-operand {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    min-height: 1.5rem;
+}
+
+.current-operand {
+    color: var(--text-primary);
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.1;
+    word-wrap: break-word;
+    word-break: break-all;
+    transition: transform 0.1s ease;
+}
+
+/* Pop animation when digit is added */
+.current-operand.pop {
+    animation: pop 0.15s ease-out;
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 1.5rem;
+    background-color: var(--calc-bg);
+    border-top: 1px solid #f3f4f6;
+}
+
+.btn {
+    border: none;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background-color: var(--btn-bg);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover);
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    background-color: var(--btn-active);
+    transform: translateY(0) scale(0.95);
+}
+
+.btn.operator {
+    background-color: var(--operator-bg);
+    color: var(--operator-text);
+}
+
+.btn.operator:hover {
+    background-color: var(--operator-hover);
+}
+
+.btn.accent {
+    background-color: var(--accent-bg);
+    color: var(--accent-text);
+}
+
+.btn.accent:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn.equals {
+    background-color: var(--equals-bg);
+    color: var(--equals-text);
+    grid-column: span 2;
+}
+
+.btn.equals:hover {
+    background-color: var(--equals-hover);
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.4);
+}
+
+.btn.zero {
+    grid-column: span 2;
+}
+
+.btn.clear {
+    grid-column: span 2;
+}
+
+/* Click ripple animation */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
